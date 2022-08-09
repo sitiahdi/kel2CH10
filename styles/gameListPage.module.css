@@ -1,0 +1,58 @@
+
+
+
+/* CSS Line */
+
+.gameListPage {
+    max-width: 100vw;
+    min-height: 100vh;
+
+    background-image: url(../public/game-list-page-assets/the-games-bg.jpg);
+    align-items: center;
+    
+}
+
+.gameListPageMain {
+    width: 80%;
+    margin: auto;
+    padding: 2rem 0px 2rem;
+    
+    box-sizing: border-box;
+}
+
+
+
+.sectionHolder {
+    width: 100%;
+
+    padding: 0px 30px;
+    margin-bottom: 2rem;
+}
+
+.sectionHeader {
+    color: white;
+
+    padding: 20px 0px;
+    margin-bottom: 1rem;
+
+    border-bottom: 1px solid white;
+}
+
+
+
+.gameCardHolder {
+
+    display: flex;
+    align-items: center;
+
+    overflow-y: auto;
+
+}
+
+.gameCardHolderAll {
+    
+    display: flex;
+    align-items: center;
+    
+    flex-wrap: wrap;
+}
