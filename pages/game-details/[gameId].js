@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/dist/client/link';
-import styles from '../../../styles/gameDetails.module.css'
+import styles from '../../styles/gameDetails.module.css'
 
-import firebaseApp from '../../../services/firebase';
+import firebaseApp from '../../services/firebase';
 
 const db = firebaseApp.firestore();
 
@@ -97,13 +97,9 @@ function GameDetailsPage() {
                             </div>
                         </div>
                         <div className={styles.playBtnHolder}>
-                            {btnActive ?
-                                <>
-                                    <button className={styles.playNowBtn}>PLAY NOW</button>
-                                </> : <>
-                                    <button className={styles.playNowBtnDisabled}>PLAY NOW</button>
-                                </>
-                            }
+                            <Link href={'/' + gameId +'/play'}>
+                                <button className={styles.playNowBtn}>PLAY NOW</button>
+                            </Link>
                         </div>
                     </div>
                 </section>
