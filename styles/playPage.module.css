@@ -1,0 +1,24 @@
+
+
+
+/* CSS Line */
+
+.playPage {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.scoringOverlay {
+    aspect-ratio: 1 / 1;
+    width: 40%;
+
+    background-color: black;
+
+    border-radius: 30px;
+}
