@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import firebase from "../services/firebase";
 import style from "../styles/Register.module.css";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Link from 'next/dist/client/link';
 import { useRouter } from "next/router"
+import getCookie from "../utils/getCookie";
 
 const Login = () => {
     const navigate = useRouter();
     const [email, setEmail] = React.useState ("");
     const [password, setPassword] = React.useState ("");
+
+    useEffect(() => {
+        const cookie = getCookie('token');
+        if (cookie) navigate.push('/');
+    }, [])
 
     const auth = getAuth(firebase);
     const handleLogin = (event) => {
@@ -17,11 +23,12 @@ const Login = () => {
             alert ("do not leave form blank")
         } else {
             signInWithEmailAndPassword (auth, email, password). then (v => {
-                document.cookie = v.user.accessToken
-            });
+                document.cookie = `token=${v.user.accessToken}`;
+                navigate.push("/")
+            }).catch(err => {
+                alert('wrong email or password');
+            })
         }
-        navigate.push("/")
-        
         
     };
 
