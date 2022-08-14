@@ -85,8 +85,6 @@
     color: white;
 
     font-size: 2.2rem;
-
-    margin-bottom: 1rem;
 }
 .gameGenre {
     color: rgb(151, 151, 151);
@@ -158,4 +156,19 @@
 
     background-color: rgb(214, 214, 214);
     cursor: not-allowed;
+}
+
+
+
+.playedOverlay {
+    color: white;
+    margin-left: 15px;
+    padding: 5px;
+    background-color: rgb(255, 61, 61);
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.playedOverlayDisabled {
+    display: none;
 }
