@@ -1,0 +1,70 @@
+
+
+
+/* CSS Line */
+
+
+.gameCard {
+    min-width: 20%;
+    max-width: 20%;
+
+    display: flex;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.gameCardMain {
+    width: 90%;
+
+    position: relative;
+    border-radius: 10px;
+    border: solid 1px rgba(0, 0, 255, 0);
+
+    transition: linear 0.05s;
+    margin: 10px 0px 10px;
+}
+.gameCardMain:hover {
+    border: solid 1px blue;
+    transform: scale(1.05, 1.05);
+}
+
+
+.gameCardImg {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.gameCardOverlay {
+    display: none;
+    transition: linear 0.05s;
+}
+.gameCardMain:hover > .gameCardOverlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    display: block;
+
+    z-index: 2;
+    border-radius: 10px;
+
+    background-color: rgba(0, 0, 0, 0.2);
+
+    box-shadow: inset 0px -30px 30px -10px black;
+}
+
+.gameCardTitleHolder {
+    height: 30%;
+
+    display: flex;
+    align-items: center;
+
+    color: white;
+    font-size: 0.8rem;
+
+    padding-left: 0.8rem;
+}
