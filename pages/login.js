@@ -1,11 +1,12 @@
 import React from "react";
 import firebase from "../services/firebase";
-import  "../styles/Register.css";
+import style from "../styles/Register.module.css";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// import { useNavigate } from 'react-router-dom';
+import Link from 'next/dist/client/link';
+import { useRouter } from "next/router"
 
 const Login = () => {
-    // const navigate = useNavigate();
+    const navigate = useRouter();
     const [email, setEmail] = React.useState ("");
     const [password, setPassword] = React.useState ("");
 
@@ -19,13 +20,14 @@ const Login = () => {
                 document.cookie = v.user.accessToken
             });
         }
-        navigate("/")
+        navigate.push("/")
         
         
     };
 
     return (
-        <div className ="container"> 
+        <div className = {style.wrapper}>
+        <div className ={style.container}> 
             <h1>Login</h1>
             <form onSubmit={(v) => handleLogin(v)}>
                 <h3>Email</h3>
@@ -37,6 +39,7 @@ const Login = () => {
                 <input type="submit"/>
                 
             </form>
+        </div>
         </div>
     )
 };

@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
 import firebase from "../services/firebase";
-import  "../styles/Register.css";
+import style from "../styles/Register.module.css";
 import {getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
 import Link from 'next/dist/client/link';
+import { useRouter } from "next/router"
 
 const db = firebase.firestore();
 const auth = getAuth(firebase);
 
 const Register = () => {
-    const navigate = useNavigate();
+    const navigate = useRouter();
 
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -37,7 +37,7 @@ const Register = () => {
                 userUid: userData.user.uid,
                 score : 0
             })  
-            navigate("/login")
+            navigate.push ("/login")
         }
     }
 
@@ -65,7 +65,8 @@ const Register = () => {
 
 
     return (
-        <div className ="container"> 
+        <div className = {style.wrapper}>
+        <div className ={style.container}> 
             <h1>Sign Up</h1>
             <form onSubmit={(v) => handleRegister(v)}>
                 <h3>Username</h3>
@@ -76,8 +77,9 @@ const Register = () => {
                 <input type="Password" placeholder="write your password here" onChange={(v)=> setPassword (v.target.value) }/>
                 <input type="submit" />
                 <Link href={'/login'}>already have an account</Link>
-                {/* <h6 onClick={()=>window.location=("/Login")}>already have an account</h6> */}
+    
             </form>
+        </div>
         </div>
     )
 };
