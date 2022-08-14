@@ -35,7 +35,8 @@ const Register = () => {
                 username, 
                 email,
                 userUid: userData.user.uid,
-                score : 0
+                score : 0,
+                gameHistory: []
             })  
             navigate.push ("/login")
         }
