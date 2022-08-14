@@ -2,18 +2,42 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link';
 import style from './gameCard.module.css'
 
+import getCookie from '../../utils/getCookie';
 
+import { useSelector } from "react-redux"
 
 function GameCard(props) {
 
+    const userGameHistory = useSelector(state => state.gameHistory.history);
+
     const [data, setData] = useState(null);
-    const [isPlayed, setIsPlayed] = useState(true);
+    const [cookie, setCookie] = useState(null);
+    const [isPlayed, setIsPlayed] = useState(false);
 
     useEffect(() => {
         if (props.data) {
+            const theCookie = getCookie('token');
+            if (!theCookie) {
+                navigate.push('/login')
+            }
+            setCookie(theCookie);
             setData(props.data);
         }
-    }, [props.data])
+    }, [props.data]);
+
+    useEffect(() => {
+        if (cookie) {
+            checkPlayed()
+        }
+    }, [cookie])
+
+    function checkPlayed() {
+        userGameHistory.forEach(e => {
+            if (e === data.id) {
+                setIsPlayed(true)
+            }
+        })
+    }
 
     return (
         <>

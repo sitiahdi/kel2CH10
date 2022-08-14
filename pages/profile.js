@@ -19,10 +19,10 @@ function Profile() {
     const navigate = useRouter();
     
     useEffect(() => {
-        if (!getCookie('token')) {
+        const theCookie = getCookie('token');
+        if (!theCookie) {
             navigate.push('/login')
         }
-        const theCookie = getCookie('token');
         setCookie(theCookie);
     }, []);
     
@@ -34,10 +34,6 @@ function Profile() {
     
     function getData() {
         const decoded = jwtDecode(cookie);
-
-        if (decoded === undefined || !decoded) {
-            navigate.push('/login');
-        }
 
         db.collection('users').get().then(querrySnapShot => {
 

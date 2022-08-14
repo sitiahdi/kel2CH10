@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { setHistory } from '../../redux/gameHistory';
 import Link from 'next/dist/client/link';
 import styles from '../../styles/gameDetails.module.css'
 
 import firebaseApp from '../../services/firebase';
+
+import jwtDecode from 'jwt-decode';
+import getCookie from '../../utils/getCookie';
+
+import { useSelector } from "react-redux"
 
 const db = firebaseApp.firestore();
 
@@ -11,32 +18,48 @@ const db = firebaseApp.firestore();
 
 function GameDetailsPage() {
 
+    const dispatch = useDispatch();
+
+    const userGameHistory = useSelector(state => state.gameHistory.history);
+
     const [data, setData] = useState(null);
-    const [btnActive, setBtnActive] = useState(false);
     const [isPlayed, setIsPlayed] = useState(false);
+
+    const [cookie, setCookie] = useState(null);
 
     const router = useRouter();
     const gameId = router.query.gameId;
 
     useEffect(() => {
         if (gameId) {
-            getData();
-            console.log(gameId);
+            const theCookie = getCookie('token');
+            if (!theCookie) {
+                navigate.push('/login')
+            }
+            setCookie(theCookie);
         }
     }, [gameId]);
+
+    useEffect(() => {
+        if (cookie) {
+            setGameHistory();
+            getData();
+        }
+    }, [cookie])
+
+    useEffect(() => {
+        if (data) {
+            checkPlayed();
+        }
+    }, [data])
 
     function getData() {
 
         db.collection('game_list').doc(gameId).get().then(querySnapShot => {
 
-            if (gameId === 'OW024DEfpwplQXf2zyIG') {
-                setBtnActive(true);
-            }
-
             if (!querySnapShot) {
                 throw Error('failed to get data');
             }
-            console.log(querySnapShot.data());
 
             const theData = {
                 id: querySnapShot.id,
@@ -62,6 +85,32 @@ function GameDetailsPage() {
     }
 
 
+    function setGameHistory() {
+        const decoded = jwtDecode(cookie)
+
+        db.collection('users').get().then(querrySnapShot => {
+            if (!querrySnapShot) {
+                throw Error('failed to get data')
+            }
+            querrySnapShot.forEach(e => {
+
+                if (e.data().userUid === decoded.user_id) {
+                    dispatch(setHistory(e.data().gameHistory));
+                }
+            });
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    function checkPlayed() {
+        userGameHistory.forEach(e => {
+            if (e === data.id) {
+                setIsPlayed(true)
+            }
+        })
+    }
 
     if (!data) {
         return (
