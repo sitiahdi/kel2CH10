@@ -1,14 +1,14 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     outline: 0;
     font-family:Arial, Helvetica, sans-serif;
     color: white;
-}
+} */
 
-body {
+.wrapper {
     height: 100vh;
-    background-image: url(../public/game-list-page-assets/the-games-bg.jpg);
+    background-image: url(../public/game-list-page-assets/main-bg.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -32,6 +32,7 @@ body {
     text-transform: uppercase;
     border-bottom: 4px solid #dc143c;
 }
+
 
 .container label {
     text-align: left;
