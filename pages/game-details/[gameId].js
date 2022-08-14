@@ -13,6 +13,7 @@ function GameDetailsPage() {
 
     const [data, setData] = useState(null);
     const [btnActive, setBtnActive] = useState(false);
+    const [isPlayed, setIsPlayed] = useState(false);
 
     const router = useRouter();
     const gameId = router.query.gameId;
@@ -87,7 +88,10 @@ function GameDetailsPage() {
 
                     <div className={styles.rightSide}>
                         <div className={styles.descriptionHolder}>
-                            <h1 className={styles.gameTitle}>{data.title}</h1>
+                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+                                <h1 className={styles.gameTitle}>{data.title}</h1>
+                                <p className={isPlayed ? styles.playedOverlay : styles.playedOverlayDisabled}>Played</p>
+                            </div>
                             <p className={styles.gameGenre}>{data.genre}</p>
                             <p className={styles.gameDescription}>{data.description}</p>
 
