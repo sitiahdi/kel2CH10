@@ -4,6 +4,7 @@ import style from "../styles/Register.module.css";
 import {getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Link from 'next/dist/client/link';
 import { useRouter } from "next/router"
+import { data } from "autoprefixer";
 
 const db = firebase.firestore();
 const auth = getAuth(firebase);
@@ -27,7 +28,8 @@ const Register = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        if (email.length === 0 || password.length === 0 || username.length === 0) {
+        try {
+            if (email.length === 0 || password.length === 0 || username.length === 0) {
             alert (" do not leave blank..")
         } else { 
             const userData = await createUserWithEmailAndPassword (auth, email, password );
@@ -37,10 +39,12 @@ const Register = () => {
                 userUid: userData.user.uid,
                 score : 0,
                 gameHistory: []
-            })  
-            navigate.push ("/login")
-        }
-    }
+            }) .then(data => {navigate.push ("/login")})  
+            
+        }} catch (error) {
+            alert ("The password must consist of 6 digits and letters or a combinationThe password must consist of 6 digits or letters or a combination"); 
+            console.error(error);
+    }} 
 
 // function Register () {
 //     const [email, setEmail] = useState ("");
