@@ -29,7 +29,6 @@ const Login = () => {
                 alert('wrong email or password');
             })
         }
-        
     };
 
     return (
