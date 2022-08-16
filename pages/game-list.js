@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setHistory } from '../redux/gameHistory';
 import styles from '../styles/gameListPage.module.css'
@@ -18,6 +19,8 @@ function GameListPage() {
 
     const [data, setData] = useState(null);
     const dispatch = useDispatch();
+
+    const navigate = useRouter();
 
     const [carouselData, setCarouselData] = useState(null);
     const [recommendationData, setRecommendationData] = useState(null);
