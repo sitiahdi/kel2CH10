@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { setHistory } from '../redux/gameHistory';
 import styles from '../styles/gameListPage.module.css'
 
 import firebaseApp from '../services/firebase'
@@ -6,21 +8,38 @@ import firebaseApp from '../services/firebase'
 import Carousel from '../components/carousel/Carousel'
 import GameCard from '../components/game-card/GameCard'
 
+
+import jwtDecode from 'jwt-decode';
+import getCookie from '../utils/getCookie'
+
 const db = firebaseApp.firestore();
 
 function GameListPage() {
 
     const [data, setData] = useState(null);
+    const dispatch = useDispatch();
 
     const [carouselData, setCarouselData] = useState(null);
     const [recommendationData, setRecommendationData] = useState(null);
     const [strategyData, setStrategyData] = useState(null);
     const [shooterData, setShooterData] = useState(null);
 
+    const [cookie, setCookie] = useState(null);
 
     useEffect(() => {
-        getData();
+        const theCookie = getCookie('token');
+        if (!theCookie) {
+            navigate.push('/login')
+        }
+        setCookie(theCookie);
     }, [])
+
+    useEffect(() => {
+        if (cookie) {
+            getData();
+            setGameHistory()
+        }
+    }, [cookie])
 
     function getData() {
 
@@ -99,6 +118,26 @@ function GameListPage() {
             getSectionData(data)
         }
     }, [data])
+
+
+    function setGameHistory() {
+        const decoded = jwtDecode(cookie)
+
+        db.collection('users').get().then(querrySnapShot => {
+            if (!querrySnapShot) {
+                throw Error('failed to get data')
+            }
+            querrySnapShot.forEach(e => {
+
+                if (e.data().userUid === decoded.user_id) {
+                    dispatch(setHistory(e.data().gameHistory));
+                }
+            });
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 
     if (!data) {
         return (

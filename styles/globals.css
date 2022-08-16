@@ -6,8 +6,13 @@
 
 body {
   font-family: sans-serif;
+<<<<<<< HEAD
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+=======
+} 
+
+>>>>>>> 37ff49b5a9131764064d412bc001a94d10930877
