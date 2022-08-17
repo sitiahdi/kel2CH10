@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import gameHistoryReducer from "./gameHistory";
 import nameReducer from "./name";
 

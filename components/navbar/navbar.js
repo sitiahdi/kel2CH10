@@ -4,12 +4,38 @@ import Link from "next/link";
 import firebase from "../../services/firebase";
 import { getAuth, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { selectName, setLogout } from "../../redux/name";
+import { selectName, setLogout, setName } from "../../redux/name";
+
+import getCookie from "../../utils/getCookie";
+import jwtDecode from "jwt-decode";
+import firebaseApp from "../../services/firebase";
 
 function Navbar() {
   const auth = getAuth(firebase);
   const dispatch = useDispatch();
   const user = useSelector(selectName);
+  const db = firebaseApp.firestore();
+
+  React.useEffect(() => {
+    const cookie = getCookie('token');
+    const decoded = jwtDecode(cookie);
+        
+    db.collection('users').get().then(querrySnapShot => {
+        
+      if (!querrySnapShot) {
+        throw Error('failed to get data')
+      }
+      
+      querrySnapShot.forEach(e => {
+        if (e.data().userUid === decoded.user_id) {
+          dispatch(setName(e.data().username));
+        }
+      });
+    }).catch(err => {
+      alert(err);
+    });
+    
+  }, []);
 
   const handleLogout = () => {
     signOut(auth)

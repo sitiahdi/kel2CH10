@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/playPage.module.css';
 
+import Link from 'next/dist/client/link';
+
 import jwtDecode from 'jwt-decode';
 import getCookie from '../../utils/getCookie';
 
@@ -21,6 +23,9 @@ function PlayPage() {
     const [userHistory, setUserHistory] = useState(null);
     const [userId, setUserId] = useState(null);
 
+    const [score, setScore] = useState(0);
+    const [playerScore, setPlayerScore] = useState(null);
+
     useEffect(() => {
         if (!getCookie('token')) {
             navigate.push('/login')
@@ -34,9 +39,16 @@ function PlayPage() {
             setTimeout(() => {
                 setIsPlaying(false);
                 getGameHistory();
+                getRandomScore();
             }, 1500)
         }
     }, cookie)
+
+    function getRandomScore() {
+        const newScore = Math.floor(Math.random() * 10) + 1;
+
+        setScore(newScore);
+    }
 
     function getGameHistory() {
         const decoded = jwtDecode(cookie);
@@ -50,6 +62,7 @@ function PlayPage() {
                 if (e.data().userUid === decoded.user_id) {
                     setUserHistory(e.data().gameHistory);
                     setUserId(e.id);
+                    setPlayerScore(e.data().score);
                 }
             });
 
@@ -62,11 +75,11 @@ function PlayPage() {
     useEffect(() => {
         if (userHistory) {
             setGameHistory();
+            setUsersScore();
         }
     }, [userHistory])
 
     function setGameHistory() {
-        const decoded = jwtDecode(cookie);
 
         let gameHistory = userHistory;
 
@@ -83,14 +96,28 @@ function PlayPage() {
         );
     }
 
+    function setUsersScore() {
+
+        const finalScore = playerScore + score
+        db.collection("users").doc(userId).update(
+            { score: finalScore }
+        );
+    }
+
     return (
         <section className={styles.playPage}>
             {isPlaying ? 
                 <>
-                    <h1>Playing...</h1>
+                    <h1 style={{ color: 'white', fontSize: 50 }}>Playing...</h1>
                 </> : <>
                     <div className={styles.scoringOverlay}>
-
+                        <h1 style={{ fontWeight: 'bold', fontSize: 40, height: '20%' }}>Finish Game</h1>
+                        <div style={{ height: '70%' }}>
+                            <p>Your Total Score: {playerScore} + {score} = {playerScore + score}</p>
+                        </div>
+                        <Link href={'/game-list'}>
+                            <button className={styles.finishBtn}>Finish</button>
+                        </Link>
                     </div>
                 </>
             }
