@@ -18,6 +18,10 @@ function Navbar() {
 
   React.useEffect(() => {
     const cookie = getCookie('token');
+
+    if (!cookie) {
+      return
+    }
     const decoded = jwtDecode(cookie);
         
     db.collection('users').get().then(querrySnapShot => {
