@@ -5,8 +5,13 @@ import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Link from 'next/dist/client/link';
 import { useRouter } from "next/router"
 import getCookie from "../utils/getCookie";
+import { useDispatch } from 'react-redux';
+import { setName } from "../redux/name";
 
+
+const db = firebase.firestore();
 const Login = () => {
+    
     const navigate = useRouter();
     const [email, setEmail] = React.useState ("");
     const [password, setPassword] = React.useState ("");
@@ -16,6 +21,8 @@ const Login = () => {
         if (cookie) navigate.push('/');
     }, [])
 
+    const dispatch = useDispatch();
+    
     const auth = getAuth(firebase);
     const handleLogin = (event) => {
         event.preventDefault();
@@ -23,13 +30,28 @@ const Login = () => {
             alert ("do not leave form blank")
         } else {
             signInWithEmailAndPassword (auth, email, password). then (v => {
+                
+                db.collection('users').get().then(querrySnapShot => {
+
+                    if (!querrySnapShot) {
+                        throw Error('failed to get data')
+                    }
+                    querrySnapShot.forEach(e => {
+                        if (e.data().userUid === v.user.uid) {
+                        dispatch(setName(e.data().username)) 
+                        }
+                    });
+        
+                }).catch(err => {
+        
+                });
                 document.cookie = `token=${v.user.accessToken}`;
+
                 navigate.push("/")
             }).catch(err => {
                 alert('wrong email or password');
             })
         }
-        
     };
 
     return (
