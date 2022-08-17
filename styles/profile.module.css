@@ -15,6 +15,8 @@
     justify-content: center;
     align-items: center;
     padding: 2rem 4rem;
+
+    position: relative;
 }
 
 .leftSide {
@@ -26,7 +28,6 @@
 .username {
     font-size: 3rem;
     color: white;
-    margin-bottom: 5rem;
 }
 
 .rightSide p {
@@ -42,4 +43,49 @@
 .rightSide {
     width: 45%;
     height: 100%;
+}
+
+.backBtn {
+    background-color: transparent;
+    border: none;
+
+    font-size: 2vw;
+
+    color: blue;
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+.backBtn:hover {
+    color: rgb(0, 0, 224);
+}
+
+
+
+.changeOverlay {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.changeHolder {
+    width: 30rem;
+    
+    padding: 2rem;
+
+    background-color: rgb(43, 43, 43);
+    border-radius: 10px;
+}
+
+
+.submitBtn {
+    padding: 5px 10px;
+    background-color: orange;
+    border-radius: 10px;
 }

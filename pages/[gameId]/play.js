@@ -80,7 +80,6 @@ function PlayPage() {
     }, [userHistory])
 
     function setGameHistory() {
-        const decoded = jwtDecode(cookie);
 
         let gameHistory = userHistory;
 
