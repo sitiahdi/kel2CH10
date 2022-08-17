@@ -1,0 +1,30 @@
+.navbar {
+  width: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+}
+.brand {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.link {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: left;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.link:hover {
+  color: gray;
+}

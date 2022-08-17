@@ -1,18 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-
+import { createSlice } from "@reduxjs/toolkit";
 
 export const nameSlice = createSlice({
-    name: "name",
-    initialState: {
-        name: ""
+  name: "name",
+  initialState: {
+    name: null,
+  },
+  reducers: {
+    setName: (state, action) => {
+      state.name = action.payload;
     },
-    reducers: {
-        setName: (state, action) => {
-            state.name = action.payload;
-        }
-    }
+    selectName: (state) => {
+      state.user.name;
+    },
+    setLogout: (state) => {
+      state.name = null;
+    },
+  },
 });
 
 export default nameSlice.reducer;
-export const { setName } = nameSlice.actions;
+export const { setName, selectName, setLogout } = nameSlice.actions;
