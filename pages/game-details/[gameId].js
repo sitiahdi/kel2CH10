@@ -27,6 +27,8 @@ function GameDetailsPage() {
 
     const [cookie, setCookie] = useState(null);
 
+    const [isRps, setIsRps] = useState(false);
+
     const router = useRouter();
     const gameId = router.query.gameId;
 
@@ -50,6 +52,9 @@ function GameDetailsPage() {
     useEffect(() => {
         if (data) {
             checkPlayed();
+            if (data.id === "OW024DEfpwplQXf2zyIG") {
+                setIsRps(true);
+            }
         }
     }, [data])
 
@@ -150,7 +155,7 @@ function GameDetailsPage() {
                             </div>
                         </div>
                         <div className={styles.playBtnHolder}>
-                            <Link href={'/' + gameId +'/play'}>
+                            <Link href={ isRps ? '/game-page' : '/' + gameId +'/play'}>
                                 <button className={styles.playNowBtn}>PLAY NOW</button>
                             </Link>
                         </div>
