@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+/* Main */
+.main {
+  padding: 15% 3% 15% 3%;
+  background: radial-gradient(189.96% 61.18% at 50% 38.82%, rgba(255, 181, 72, 0) 0%, rgba(52, 44, 29, 0.80319) 73.22%, #08090a 99.74%), url("../public/landing/main-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  overflow: hidden;
+}
+.button {
+  border: 0;
+  background: linear-gradient(194.68deg, #ffb548 11.27%, #f3af34 90.4%);
+  width: 260px;
+  height: 56px;
+}
+
+/* Features */
+.features {
+  padding: 10% 7%;
+  background: radial-gradient(51.1% 80.48% at 30.85% 53.65%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 19.2%, rgba(4, 5, 6, 0.520671) 47.48%, #080a0b 99.74%), url("../public/landing/features.jpg");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 100%;
+  overflow: hidden;
+}
+.marker1::marker {
+  content: url("../public/landing/ellipse1.svg");
+}
+.markerelse::marker {
+  content: url("../public/landing/ellipse.svg");
+}
+.marker {
+  list-style: none;
+}
+.first {
+  position: relative;
+}
+.markerspan {
+  position: absolute;
+  left: -9px;
+  top: 15px;
+  content: "";
+  height: 99%;
+  width: 0;
+  border-left: 2px solid white;
+}
+.firstdetail {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+}
+/* Quotes */
+.quotes {
+  padding: 7% 10%;
+  background: radial-gradient(70.52% 37.27% at 24.21% 47.47%, rgba(35, 15, 15, 0) 0%, rgba(0, 0, 0, 0) 51.1%, #080a0b 99.74%), url(../public/landing/quotes.png);
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+.quotestext {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+}
+.card {
+  width: 28vw;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+.photo1 {
+  background: url("../public/landing/photo1.png");
+  align-self: start;
+  width: 62px;
+  height: 62px;
+  box-shadow: 0px 2px 6px rgba(47, 83, 151, 0.1);
+  border-radius: 100px;
+  position: absolute;
+  z-index: 2;
+}
+.photo2 {
+  background: url("../public/landing/photo2.png");
+  align-self: start;
+  width: 62px;
+  height: 62px;
+  box-shadow: 0px 2px 6px rgba(47, 83, 151, 0.1);
+  border-radius: 100px;
+  position: absolute;
+  z-index: 2;
+}
+.photo3 {
+  background: url("../public/landing/photo3.png");
+  align-self: start;
+  width: 62px;
+  height: 62px;
+  box-shadow: 0px 2px 6px rgba(47, 83, 151, 0.1);
+  border-radius: 100px;
+  position: absolute;
+  z-index: 2;
+}
+.photoshadow {
+  margin-top: 2px;
+  margin-left: 7px;
+  width: 62px;
+  height: 62px;
+  background: #ffb548;
+  box-shadow: 0px 2px 6px rgba(47, 83, 151, 0.1);
+  border-radius: 100px;
+}
+.icon {
+  background: url("../public/landing/twitter.svg");
+  margin-top: 15px;
+  width: 18px;
+  height: 14px;
+}
+.name {
+  margin-top: 10px;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #ffb548;
+  margin-bottom: 0;
+}
+.job {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: grey;
+}
+.comment {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: white;
+}
+.date {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  color: grey;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+/* Newsteller */
+.news {
+  padding: 5% 7%;
+  background: #080a0b;
+  background-image: radial-gradient(45.43% 53.19% at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 46.15%, #080a0b 99.74%), url(../public/landing/skull.png);
+  background-position-x: 25%;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+.formfloat {
+  width: 25vw;
+}
+.formcontrol {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+}
+.formcontrol:focus {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+}
+.formlabel {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
+
+/* Breakpoint Extra Large 1200px */
+@media (max-width: 1200px) {
+  .main {
+    padding-top: 27%;
+  }
+  .quotes {
+    padding: 10% 5%;
+  }
+  .card {
+    width: 32vw;
+  }
+  .button {
+    width: 200px;
+  }
+}
+
+/* Breakpoint Large 992px */
+@media (max-width: 992px) {
+  .main {
+    padding-top: 27%;
+  }
+  .main-scroll {
+    padding-top: 27%;
+  }
+  .features {
+    padding: 15% 7%;
+  }
+  .featurestitle {
+    text-align: center;
+  }
+  .featurestext {
+    text-align: center;
+  }
+  .quotes {
+    padding: 10% 25%;
+  }
+  .quotesbanner {
+    text-align: center;
+  }
+  .cardcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    width: 50vw;
+  }
+  .cardbody {
+    text-align: center;
+  }
+  .newstitle {
+    text-align: center;
+  }
+  .newstext {
+    text-align: center;
+  }
+  .newsdesc {
+    text-align: center;
+  }
+  .formfloat {
+    width: 50vw;
+  }
+  .copyright {
+    text-align: center;
+  }
+  .copyrightend {
+    text-align: center;
+  }
+  .button {
+    width: 260px;
+  }
+}
+
+/* Breakpoint Medium 768px */
+@media (max-width: 768px) {
+  .main {
+    padding-top: 35%;
+  }
+  .main-scroll {
+    padding-top: 35%;
+  }
+  .features {
+    padding: 20% 7%;
+  }
+  .markerspan {
+    top: 12px;
+  }
+  .news {
+    padding: 10% 10%;
+  }
+  .button {
+    width: 200px;
+  }
+  .quotes {
+    padding: 10% 10%;
+  }
+  .card {
+    width: 60vw;
+  }
+}
+/* Breakpoint Small 576px */
+@media (max-width: 576px) {
+  .main {
+    padding-top: 50%;
+  }
+  .main-scroll {
+    padding-top: 50%;
+  }
+  .features {
+    padding: 40% 5%;
+  }
+  .news {
+    padding: 15% 10% 10% 10%;
+  }
+  .formcontrol {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .newsbutton {
+    display: flex;
+    justify-content: center;
+  }
+  .quotes {
+    padding: 10% 5%;
+  }
+  .card {
+    width: 80vw;
+  }
+  .formfloat {
+    width: 80vw;
+  }
+  .button {
+    width: auto;
+    height: auto;
+  }
+}
+/* Breakpoint Ekstra Small 456px */
+@media (max-width: 456px) {
+  .main {
+    padding-top: 60%;
+  }
+  .markerspan {
+    top: 10px;
+  }
+  .news {
+    padding: 15% 5% 10% 5%;
+  }
+  .formfloat {
+    width: 90vw;
+  }
+  .quotes {
+    padding: 10% 5%;
+  }
+  .card {
+    width: 90vw;
+  }
+}

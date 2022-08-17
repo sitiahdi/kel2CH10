@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import gameHistoryReducer from './gameHistory';
-import nameReducer from './name';
+import gameHistoryReducer from "./gameHistory";
+import nameReducer from "./name";
 
 const store = configureStore({
-    reducer: {
-        gameHistory: gameHistoryReducer,
-        name: nameReducer
-    }
+  reducer: {
+    gameHistory: gameHistoryReducer,
+    name: nameReducer,
+  },
 });
 
-export default store
+export default store;
