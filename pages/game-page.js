@@ -17,29 +17,43 @@ function GamePage() {
         window.location.reload();
     }
 
-    function playerOnClick() {
-        // document.getElementById('playerHand').style.backgroundColor = "#9C835F";
+    function batuOnClick() {
         var element = document.getElementById('playerWin');
         var value = element.innerHTML;
+        document.getElementById('playerKertas').style.backgroundColor= '#9C835F';
+        document.getElementById('playerGunting').style.backgroundColor= '#9C835F';
 
         ++value;
 
         console.log(value);
-        // document.getElementById('playerBatu').style.backgroundColor= 'red'
         document.getElementById('playerWin').innerHTML = value;
+        document.getElementById('playerBatu').style.backgroundColor= 'red';
     }
-    function handOnClick() {
-        var el = useId('playerHand');
-        var value = el.
+    function kertasOnClick() {
+        var element = document.getElementById('playerWin');
+        var value = element.innerHTML;
+        document.getElementById('playerBatu').style.backgroundColor= '#9C835F';
+        document.getElementById('playerGunting').style.backgroundColor= '#9C835F';
 
-        if (el.value == 1) {
-            console.log('batu')
-        } else if (el.value == 2) {
-            console.log('kertas')
-        } else if (el.value == 3) {
-            console.log('gunting')
-        }
+        ++value;
+
+        console.log(value);
+        document.getElementById('playerWin').innerHTML = value;
+        document.getElementById('playerKertas').style.backgroundColor= 'red';
     }
+    function guntingOnClick() {
+        var element = document.getElementById('playerWin');
+        var value = element.innerHTML;
+        document.getElementById('playerBatu').style.backgroundColor= '#9C835F';
+        document.getElementById('playerKertas').style.backgroundColor= '#9C835F';
+
+        ++value;
+
+        console.log(value);
+        document.getElementById('playerWin').innerHTML = value;
+        document.getElementById('playerGunting').style.backgroundColor= 'red';
+    }
+
     function comOnClick() {
         var element = document.getElementById('comWin');
         var value = element.innerHTML;
@@ -72,31 +86,32 @@ function GamePage() {
                     <h1 id='comWin'>0</h1>
                 </div>
             </div>
-            <div style={{ display:'flex', justifyContent:'space-evenly' }}>
+            <div 
+            style={{ display:'flex', justifyContent:'space-evenly' }}>
                 <div 
                 style={{width:'100px'}}>
                     <div style={{ display:'flex', justifyContent:'space-around' }}>Player 1</div>
                     <div 
-                    id='playerHand playerBatu'
+                    id='playerBatu'
                     className='bg-#9C835F-500 hover:bg-red-700 rounded-full'
                     style={{ padding:'20px' }}
-                    onClick={ playerOnClick, handOnClick }
+                    onClick={ batuOnClick }
                     value='1'>
                         <Image src={Batu} />
                     </div>
                     <div 
-                    id='playerHand playerKertas'
+                    id='playerKertas'
                     className='bg-#9C835F-500 hover:bg-red-700 rounded-full'
-                    style={{ display:"block", padding:'20px' }}
-                    onClick={ playerOnClick, handOnClick }
+                    style={{ padding:'20px' }}
+                    onClick={ kertasOnClick }
                     value='2'>
                         <Image src={Kertas} />
                     </div>
                     <div 
-                    id='playerHand playerGunting'
+                    id='playerGunting'
                     className='bg-#9C835F-500 hover:bg-red-700 rounded-full'
                     style={{ padding:'20px' }}
-                    onClick={ playerOnClick, handOnClick }
+                    onClick={ guntingOnClick }
                     value='3'>
                         <Image src={Gunting} />
                     </div>
