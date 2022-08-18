@@ -98,7 +98,7 @@ export default function Home() {
               <div className="row">
                 <div className="col-sm-5 mb-4">
                   <div className={`${styles.card} card`}>
-                    <div className="card-header mb-0 pb-0 d-flex flexgi-row align-content-center justify-content-between">
+                    <div className="card-header mb-0 pb-0 d-flex flex-row align-content-center justify-content-between">
                       <div className="card-header1 d-flex flex-row">
                         <div className={styles.photo2}></div>
                         <div className={styles.photoshadow}></div>
