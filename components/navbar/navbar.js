@@ -17,38 +17,38 @@ function Navbar() {
   const db = firebaseApp.firestore();
 
   React.useEffect(() => {
-    const cookie = getCookie('token');
+    const cookie = getCookie("token");
 
     if (!cookie) {
-      return
+      return;
     }
     const decoded = jwtDecode(cookie);
-        
-    db.collection('users').get().then(querrySnapShot => {
-        
-      if (!querrySnapShot) {
-        throw Error('failed to get data')
-      }
-      
-      querrySnapShot.forEach(e => {
-        if (e.data().userUid === decoded.user_id) {
-          dispatch(setName(e.data().username));
+
+    db.collection("users")
+      .get()
+      .then((querrySnapShot) => {
+        if (!querrySnapShot) {
+          throw Error("failed to get data");
         }
+
+        querrySnapShot.forEach((e) => {
+          if (e.data().userUid === decoded.user_id) {
+            dispatch(setName(e.data().username));
+          }
+        });
+      })
+      .catch((err) => {
+        alert(err);
       });
-    }).catch(err => {
-      alert(err);
-    });
-    
-  }, []);
+  }, [dispatch, db]);
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        dispatch(setLogout);
         document.cookie.split(";").forEach((c) => {
           document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
         });
-        dispatch(selectName);
+        dispatch(setLogout);
         window.location.href = "/";
         console.log("User logged out");
       })
