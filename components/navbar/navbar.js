@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Navbar.module.css";
+import style from "./navbar.module.css";
 import Link from "next/link";
 import firebase from "../../services/firebase";
 import { getAuth, signOut } from "firebase/auth";
