@@ -1,43 +1,36 @@
-
-
-
 /* CSS Line */
 
 .playPage {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    background-image: url(../public/game-list-page-assets/the-games-bg.jpg);
-    background-position: center;
-    background-size: cover;
+  background-image: url("../public/game-list-page-assets/the-games-bg.jpg");
+  background-position: center;
+  background-size: cover;
 }
-
-
 
 .scoringOverlay {
-    aspect-ratio: 1 / 1;
-    width: 37rem;
+  aspect-ratio: 1 / 1;
+  width: 37rem;
 
-    background-color: white;
+  background-color: white;
 
-    border-radius: 30px;
-    padding: 20px;
+  border-radius: 30px;
+  padding: 20px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-
 .finishBtn {
-    padding: 10px 20px;
+  padding: 10px 20px;
 
-    border-radius: 10px;
+  border-radius: 10px;
 
-    background-color: orange;
+  background-color: orange;
 }
