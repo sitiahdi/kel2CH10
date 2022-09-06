@@ -31,7 +31,7 @@ jobs:
       
       # Install dependencies
       - name: Run npm install
-        run: npm install --force
+        run: npm install
         
   # deployment job
   deploy:
