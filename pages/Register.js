@@ -38,7 +38,8 @@ const Register = () => {
                 email,
                 userUid: userData.user.uid,
                 score : 0,
-                gameHistory: []
+                gameHistory: [],
+                pict: ''
             }) .then(data => {navigate.push ("/login")})  
             
         }} catch (error) {
