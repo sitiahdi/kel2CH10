@@ -1,5 +1,6 @@
 import React from "react";
-import style from "./Navbar.module.css";
+import Image from "next/image";
+import style from "./navbar.module.css";
 import Link from "next/link";
 import firebase from "../../services/firebase";
 import { getAuth, signOut } from "firebase/auth";
@@ -10,10 +11,14 @@ import getCookie from "../../utils/getCookie";
 import jwtDecode from "jwt-decode";
 import firebaseApp from "../../services/firebase";
 
+import unknownUserImg from '../../public/image/unknownUser.png'
+import { setPict } from "../../redux/profilePict";
+
 function Navbar() {
   const auth = getAuth(firebase);
   const dispatch = useDispatch();
   const user = useSelector(selectName);
+  const profilePict = useSelector(state => state.profilePict.pict);
   const db = firebaseApp.firestore();
 
   React.useEffect(() => {
@@ -34,18 +39,25 @@ function Navbar() {
         querrySnapShot.forEach((e) => {
           if (e.data().userUid === decoded.user_id) {
             dispatch(setName(e.data().username));
+<<<<<<< HEAD
+=======
+            dispatch(setPict(e.data().pict));
+>>>>>>> 22f4203d271ed76eb5825766c9366bafac106996
           }
         });
       })
       .catch((err) => {
         alert(err);
       });
+<<<<<<< HEAD
   }, []);
+=======
+  }, [dispatch, db]);
+>>>>>>> 22f4203d271ed76eb5825766c9366bafac106996
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        dispatch(setLogout);
         document.cookie.split(";").forEach((c) => {
           document.cookie = c
             .replace(/^ +/, "")
@@ -54,7 +66,7 @@ function Navbar() {
               "=;expires=" + new Date().toUTCString() + ";path=/"
             );
         });
-        dispatch(selectName);
+        dispatch(setLogout);
         window.location.href = "/";
         console.log("User logged out");
       })
@@ -119,10 +131,26 @@ function Navbar() {
                 className={`navbar-nav text center me-lg-5 pe-lg-5 ${style.link}`}
               >
                 <li className="nav-item">
+<<<<<<< HEAD
                   <Link href="/profile">
                     <a className={`${style.link} text-warning`}>
                       {user.payload.name.name}
                     </a>
+=======
+                  <Link href={'/profile'}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
+                      <div className={style.profilePictHolder}>
+                        {profilePict && profilePict !== '' ?
+                          <>
+                            <img src={profilePict} />
+                          </> : <>
+                            <Image src={unknownUserImg} />
+                          </>
+                        }
+                      </div>
+                      <a className={`${style.link} text-warning`}>{user.payload.name.name}</a>
+                    </div>
+>>>>>>> 22f4203d271ed76eb5825766c9366bafac106996
                   </Link>
                 </li>
                 <li className="nav-item">

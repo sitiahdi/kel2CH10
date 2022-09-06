@@ -1,91 +1,174 @@
-
-
-
 /* CSS Line */
 
 .profilePage {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
-    background: url(../public/profile-page-assets/features.jpg);
-    background-position: center;
-    background-size: cover;
+  background-image: url("../public/profile-page-assets/features.jpg");
+  background-position: center;
+  background-size: cover;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 4rem;
+  padding: 2rem 4rem;
 
-    position: relative;
+  position: relative;
+}
+
+.profilePageContentHolder {
+  max-width: 100%;
+  height: 80vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .leftSide {
-    width: 55%;
-    height: 100%;
-    padding-top: 2rem;
+  width: 55%;
+  height: 100%;
+  padding-top: 2rem;
 }
 
 .username {
-    font-size: 3rem;
-    color: white;
+  font-size: 3rem;
+  color: white;
 }
 
 .rightSide p {
-    color: lightgray;
+  color: lightgray;
 }
 
 .emailHolder {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
-
-
 .rightSide {
-    width: 45%;
-    height: 100%;
+  width: 45%;
+  height: 100%;
 }
 
 .backBtn {
-    background-color: transparent;
-    border: none;
+  background-color: transparent;
+  border: none;
 
-    font-size: 2vw;
+  font-size: 2vw;
 
-    color: blue;
-    text-decoration: underline;
+  color: blue;
+  text-decoration: underline;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 .backBtn:hover {
-    color: rgb(0, 0, 224);
+  color: rgb(0, 0, 224);
 }
 
-
-
 .changeOverlay {
-    width: 100vw;
-    height: 100vh;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
 
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10;
 }
 
 .changeHolder {
-    width: 30rem;
-    
-    padding: 2rem;
+  width: 30rem;
 
-    background-color: rgb(43, 43, 43);
-    border-radius: 10px;
+  padding: 2rem;
+
+  background-color: rgb(43, 43, 43);
+  border-radius: 10px;
 }
-
 
 .submitBtn {
-    padding: 5px 10px;
-    background-color: orange;
-    border-radius: 10px;
+  padding: 5px 10px;
+  background-color: orange;
+  border-radius: 10px;
 }
+
+
+
+.profilePictureHolder {
+  margin-top: 3rem;
+
+  aspect-ratio: 1 / 1;
+  width: 5rem;
+
+  border-radius: 100px;
+  overflow: hidden;
+
+  position: relative;
+}
+
+.changePictOverlay {
+  width: 100%;
+  height: 100%;
+
+  font-size: 0.8rem;
+
+  background-color: rgba(0, 0, 0, 0.445);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.05s;
+}
+
+.changePictForm {
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.changePictBtn {
+  width: 100%;
+  min-height: 100%;
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  opacity: 0;
+  cursor: pointer;
+}
+
+.changePictForm:hover > .changePictOverlay {
+  opacity: 1;
+}
+
+
+
+.previewImgHolder {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 20rem;
+
+  overflow: hidden;
+}
+
+.changePictOverlayBtnHolder {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+

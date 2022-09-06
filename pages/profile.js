@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import styles from '../styles/profile.module.css';
 import Link from 'next/link';
 
@@ -6,12 +7,15 @@ import firebase from '../services/firebase';
 import jwtDecode from 'jwt-decode';
 
 import { useRouter } from 'next/router';
-import {getAuth, signInWithEmailAndPassword, updatePassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import getCookie from '../utils/getCookie';
 
 import { useSelector } from "react-redux"
 import { useDispatch } from 'react-redux';
 import { setName } from '../redux/name';
+import { setPict } from '../redux/profilePict';
+
+import unknownUserImg from '../public/image/unknownUser.png'
 
 
 
@@ -22,6 +26,11 @@ function Profile() {
     const [data, setData] = useState(null);
     const [cookie, setCookie] = useState(null);
     const [changeOverlay, setChangeOverlay] = useState(0);
+    const [loading, setLoading] = useState(false);
+
+    const [previewSource, setPreviewSource] = useState('');
+    const [imgFile, setImgFile] = useState(null);
+    const [imgValue, setImgValue] = useState('');
 
     const [newName, setNewName] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -31,7 +40,8 @@ function Profile() {
     const dispatch = useDispatch();
     const auth = getAuth(firebase);
 
-    const username = useSelector(state => state.name.name)
+    const username = useSelector(state => state.name.name);
+    const profilePict = useSelector(state => state.profilePict.pict)
     
     useEffect(() => {
         const theCookie = getCookie('token');
@@ -64,9 +74,11 @@ function Profile() {
                         id: e.id,
                         username: e.data().username,
                         email: e.data().email,
-                        score: e.data().score
+                        score: e.data().score,
+                        pict: e.data()?.pict
                     }
                     dispatch(setName(theData.username));
+                    dispatch(setPict(theData.pict));
                     setData(theData);
                 }
             });
@@ -111,6 +123,69 @@ function Profile() {
         });
     }
 
+    function handleFileInputChange(e) {
+        setImgFile(e.target.files[0]);
+    }
+
+    useEffect(() => {
+        if (imgFile) {
+            const reader = new FileReader()
+            reader.readAsDataURL(imgFile);
+            reader.onloadend = () => {
+                setPreviewSource(reader.result);
+            }
+    
+            setChangeOverlay(3);
+        }
+    }, [imgFile])
+
+
+
+    async function handlePictureSubmit(e) {
+        e.preventDefault();
+        setLoading(true);
+        
+        if (!imgFile) {
+            alert("Try Again");
+            return
+        }
+        
+        fetch('http://localhost:8000/api/upload', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                pict: previewSource
+            })
+        }).then(res => {
+            res.json().then(resData => {
+
+                if (data.pict !== undefined) {
+                    db.collection("users").doc(data.id).update(
+                        { pict: resData.url }
+                    );
+                    dispatch(setPict(resData.url));
+                } else {
+                    db.collection("users").doc(data.id).add(
+                        { pict: resData.url }
+                    );
+                    dispatch(setPict(resData.url));
+                }
+                setLoading(false);
+            });
+            setChangeOverlay(0);
+            setImgFile(null);
+        }).catch(err => {
+            alert('Try Again');
+            console.log(err);
+        });
+
+        setChangeOverlay(0);
+        setImgFile(null);
+    }
+
     function renderedChangeOverlay() {
         if (changeOverlay === 1) {
             return (
@@ -139,6 +214,23 @@ function Profile() {
                     </div>     
                 </div>
             )
+        } else if (changeOverlay === 3) {
+            return (
+                <div className={styles.changeOverlay}>
+                    <div className={styles.changeHolder}>
+                        <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: 'white' }}>Change Profile Picture</h2>
+                        <div className={styles.previewImgHolder}>
+                            <img src={previewSource} />
+                        </div>
+                        <form onSubmit={e => handlePictureSubmit(e)} style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div className={styles.changePictOverlayBtnHolder}>
+                                <button style={{ fontSize: '1.2rem', marginTop: '1rem' }} onClick={() => { setChangeOverlay(0), setImgFile(null) }} className={styles.backBtn}>Back</button>
+                                <div style={{ marginTop: '20px' }}><button className={styles.submitBtn} type='submit'>Submit</button></div>
+                            </div>
+                        </form>
+                    </div>     
+                </div>
+            )
         } else if (changeOverlay === 0) {
             return (
                 <div style={{ display: 'none' }}></div>
@@ -146,10 +238,12 @@ function Profile() {
         }
     }
 
-    if (!data) {
+    if (!data || loading) {
         return (
             <section className={styles.profilePage}>
-                <h1 style={{textAlign: 'center', color: 'white', fontSize: '4rem'}}>Loading ...</h1>
+                <div className={styles.profilePageContentHolder}>
+                    <h1 style={{textAlign: 'center', color: 'white', fontSize: '4rem'}}>Loading ...</h1>
+                </div>
             </section>
         )
     }
@@ -158,23 +252,49 @@ function Profile() {
         <>
             {data &&
                 <section className={styles.profilePage}>
+                    <div style={{ height: "5rem", maxWidth: "100vw" }}></div>
                     {renderedChangeOverlay()}
-                    <div className={styles.leftSide}>
-                        <div style={{ height: '90%' }}></div>
-                        <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                            <Link href={'/'}>
-                                <button className={styles.backBtn}>Back</button>
-                            </Link>
+                    <div className={styles.profilePageContentHolder}>
+                        <div className={styles.leftSide}>
+                            <div style={{ height: '90%' }}></div>
+                            <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                <Link href={'/'}>
+                                    <button className={styles.backBtn}>Back</button>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.rightSide}>
-                        <div style={{ marginBottom: '5rem' }}>
-                            <h1 className={styles.username}>User : {username}</h1>
-                            <p style={{ color: 'gray', cursor: 'pointer' }} onClick={() => setChangeOverlay(1)} >change username</p>
+                        <div className={styles.rightSide}>
+                            <div style={{ marginBottom: '5rem' }}>
+                                <h1 className={styles.username}>User : {username}</h1>
+                                <p style={{ color: 'gray', cursor: 'pointer' }} onClick={() => setChangeOverlay(1)} >change username</p>
+                            </div>
+                            <p className={styles.emailHolder}>email : {data.email}</p>
+                            <p>score : {data.score}</p>
+                            <p style={{ color: 'gray', cursor: 'pointer', marginTop: '3rem' }} onClick={() => setChangeOverlay(2)} >change password</p>
+
+                            <div className={styles.profilePictureHolder}>
+                                {profilePict && profilePict !== '' ?
+                                    <>
+                                        <img src={profilePict} />
+                                    </> : <>
+                                        <Image src={unknownUserImg} />
+                                    </>
+                                }
+                                <form className={styles.changePictForm}>
+                                    <div className={styles.changePictOverlay}>
+                                        <p>CHANGE</p>
+                                    </div>
+                                    <input
+                                        accept="image/png, image/gif, image/jpeg"
+                                        className={styles.changePictBtn} 
+                                        type={'file'} 
+                                        name={'image'}
+                                        value={imgValue}
+                                        onChange={e => handleFileInputChange(e)} 
+                                    />
+                                </form>
+                            </div>
                         </div>
-                        <p className={styles.emailHolder}>email : {data.email}</p>
-                        <p>score : {data.score}</p>
-                        <p style={{ color: 'gray', cursor: 'pointer', marginTop: '3rem' }} onClick={() => setChangeOverlay(2)} >change password</p>
                     </div>
                 </section>
             }

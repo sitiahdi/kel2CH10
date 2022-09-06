@@ -1,9 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
-
 /* Main */
 .main {
   padding: 15% 3% 15% 3%;
-  background: radial-gradient(189.96% 61.18% at 50% 38.82%, rgba(255, 181, 72, 0) 0%, rgba(52, 44, 29, 0.80319) 73.22%, #08090a 99.74%), url("../public/landing/main-bg.jpg");
+  background: radial-gradient(189.96% 61.18% at 50% 38.82%, rgba(255, 181, 72, 0) 0%, rgba(52, 44, 29, 0.80319) 73.22%, #08090a 99.74%);
+  background-image: url("../public/landing-page-assets/main-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,7 +19,8 @@
 /* Features */
 .features {
   padding: 10% 7%;
-  background: radial-gradient(51.1% 80.48% at 30.85% 53.65%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 19.2%, rgba(4, 5, 6, 0.520671) 47.48%, #080a0b 99.74%), url("../public/landing/features.jpg");
+  background: radial-gradient(51.1% 80.48% at 30.85% 53.65%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 19.2%, rgba(4, 5, 6, 0.520671) 47.48%, #080a0b 99.74%);
+  background-image: url("../public/landing-page-assets/features.jpg");
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -28,10 +28,10 @@
   overflow: hidden;
 }
 .marker1::marker {
-  content: url("../public/landing/ellipse1.svg");
+  content: url("../public/landing-page-assets/ellipse1.svg");
 }
 .markerelse::marker {
-  content: url("../public/landing/ellipse.svg");
+  content: url("../public/landing-page-assets/ellipse.svg");
 }
 .marker {
   list-style: none;
@@ -44,7 +44,7 @@
   left: -9px;
   top: 15px;
   content: "";
-  height: 99%;
+  height: 97%;
   width: 0;
   border-left: 2px solid white;
 }
@@ -59,7 +59,8 @@
 /* Quotes */
 .quotes {
   padding: 7% 10%;
-  background: radial-gradient(70.52% 37.27% at 24.21% 47.47%, rgba(35, 15, 15, 0) 0%, rgba(0, 0, 0, 0) 51.1%, #080a0b 99.74%), url(../public/landing/quotes.png);
+  background: radial-gradient(70.52% 37.27% at 24.21% 47.47%, rgba(35, 15, 15, 0) 0%, rgba(0, 0, 0, 0) 51.1%, #080a0b 99.74%);
+  background-image: url("../public/landing-page-assets/quotes.png");
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -79,7 +80,7 @@
   border-radius: 10px;
 }
 .photo1 {
-  background: url("../public/landing/photo1.png");
+  background-image: url("../public/landing-page-assets/photo1.png");
   align-self: start;
   width: 62px;
   height: 62px;
@@ -89,7 +90,7 @@
   z-index: 2;
 }
 .photo2 {
-  background: url("../public/landing/photo2.png");
+  background-image: url("../public/landing-page-assets/photo2.png");
   align-self: start;
   width: 62px;
   height: 62px;
@@ -99,7 +100,7 @@
   z-index: 2;
 }
 .photo3 {
-  background: url("../public/landing/photo3.png");
+  background-image: url("../public/landing-page-assets/photo3.png");
   align-self: start;
   width: 62px;
   height: 62px;
@@ -118,7 +119,7 @@
   border-radius: 100px;
 }
 .icon {
-  background: url("../public/landing/twitter.svg");
+  background-image: url("../public/landing-page-assets/twitter.svg");
   margin-top: 15px;
   width: 18px;
   height: 14px;
@@ -163,7 +164,7 @@
 .news {
   padding: 5% 7%;
   background: #080a0b;
-  background-image: radial-gradient(45.43% 53.19% at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 46.15%, #080a0b 99.74%), url(../public/landing/skull.png);
+  background-image: url("../public/landing-page-assets/skull.png");
   background-position-x: 25%;
   background-position-y: 50%;
   background-repeat: no-repeat;

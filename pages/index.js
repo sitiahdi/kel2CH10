@@ -2,16 +2,15 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/landingPage.module.css";
 
-export default function Home() {
+function Home() {
   return (
     <div>
       <Head>
         <title>PLAY</title>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
-        <title>PLAY</title>
       </Head>
 
       <div id="main" className={`${styles.main} d-flex justify-content-center align-content-center`}>
@@ -98,7 +97,7 @@ export default function Home() {
               <div className="row">
                 <div className="col-sm-5 mb-4">
                   <div className={`${styles.card} card`}>
-                    <div className="card-header mb-0 pb-0 d-flex flexgi-row align-content-center justify-content-between">
+                    <div className="card-header mb-0 pb-0 d-flex flex-row align-content-center justify-content-between">
                       <div className="card-header1 d-flex flex-row">
                         <div className={styles.photo2}></div>
                         <div className={styles.photoshadow}></div>
@@ -170,3 +169,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
