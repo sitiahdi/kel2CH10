@@ -1,0 +1,18 @@
+.page {
+  backgroundcolor: white;
+}
+
+.title {
+  fontsize: 24pt;
+  fontweight: bold;
+}
+
+.section {
+  margin: 6;
+  padding: 8;
+  fontsize: 16pt;
+}
+
+.button {
+  margin-top: 40px;
+}
