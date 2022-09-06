@@ -31,6 +31,7 @@ jobs:
       
       # Install dependencies
       - name: Run npm install
+      run: npm config set legacy-peer-deps true
         run: npm install
         
   # deployment job
