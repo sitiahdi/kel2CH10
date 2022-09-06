@@ -7,6 +7,7 @@ import { useRouter } from "next/router"
 import getCookie from "../utils/getCookie";
 import { useDispatch } from 'react-redux';
 import { setName } from "../redux/name";
+import { setPict } from "../redux/profilePict";
 
 
 const db = firebase.firestore();
@@ -38,7 +39,8 @@ const Login = () => {
                     }
                     querrySnapShot.forEach(e => {
                         if (e.data().userUid === v.user.uid) {
-                        dispatch(setName(e.data().username)) 
+                            dispatch(setName(e.data().username))
+                            dispatch(setPict(e.data().pict))
                         }
                     });
         
