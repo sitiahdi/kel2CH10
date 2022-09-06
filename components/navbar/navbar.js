@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import style from "./navbar.module.css";
 import Link from "next/link";
 import firebase from "../../services/firebase";
@@ -10,10 +11,14 @@ import getCookie from "../../utils/getCookie";
 import jwtDecode from "jwt-decode";
 import firebaseApp from "../../services/firebase";
 
+import unknownUserImg from '../../public/image/unknownUser.png'
+import { setPict } from "../../redux/profilePict";
+
 function Navbar() {
   const auth = getAuth(firebase);
   const dispatch = useDispatch();
   const user = useSelector(selectName);
+  const profilePict = useSelector(state => state.profilePict.pict);
   const db = firebaseApp.firestore();
 
   React.useEffect(() => {
@@ -34,6 +39,7 @@ function Navbar() {
         querrySnapShot.forEach((e) => {
           if (e.data().userUid === decoded.user_id) {
             dispatch(setName(e.data().username));
+            dispatch(setPict(e.data().pict));
           }
         });
       })
@@ -90,8 +96,19 @@ function Navbar() {
             {user.payload.name.name ? (
               <ul className={`navbar-nav text center me-lg-5 pe-lg-5 ${style.link}`}>
                 <li className="nav-item">
-                  <Link href="/profile">
-                    <a className={`${style.link} text-warning`}>{user.payload.name.name}</a>
+                  <Link href={'/profile'}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
+                      <div className={style.profilePictHolder}>
+                        {profilePict && profilePict !== '' ?
+                          <>
+                            <img src={profilePict} />
+                          </> : <>
+                            <Image src={unknownUserImg} />
+                          </>
+                        }
+                      </div>
+                      <a className={`${style.link} text-warning`}>{user.payload.name.name}</a>
+                    </div>
                   </Link>
                 </li>
                 <li className="nav-item">
