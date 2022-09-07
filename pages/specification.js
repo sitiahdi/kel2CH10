@@ -10,7 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import ReactPDF from "@react-pdf/renderer";
 
-const Pdfreact = () => {
+function Pdfreact() {
   return (
     <Document>
       <Page size={"A4"} style={style.page}>
