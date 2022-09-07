@@ -11,14 +11,15 @@ import getCookie from "../../utils/getCookie";
 import jwtDecode from "jwt-decode";
 import firebaseApp from "../../services/firebase";
 
-import unknownUserImg from '../../public/image/unknownUser.png'
+import unknownUserImg from "../../public/image/unknownUser.png";
 import { setPict } from "../../redux/profilePict";
+import Canvas from "../canvas/canvas";
 
 function Navbar() {
   const auth = getAuth(firebase);
   const dispatch = useDispatch();
   const user = useSelector(selectName);
-  const profilePict = useSelector(state => state.profilePict.pict);
+  const profilePict = useSelector((state) => state.profilePict.pict);
   const db = firebaseApp.firestore();
 
   React.useEffect(() => {
@@ -71,10 +72,15 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className={`navbar-nav text center ms-xl-auto ps-lg-auto me-lg-auto ${style.link}`}>
+            <ul className={`navbar-nav ms-xl-auto ps-lg-auto me-lg-auto ${style.link}`}>
               <li className="nav-item ms-lg-4">
                 <Link href="/game-list">
                   <a className={`${style.link}`}>GAME</a>
+                </Link>
+              </li>
+              <li className="nav-item ms-lg-4">
+                <Link href="/moments">
+                  <a className={`${style.link}`}>MOMENTS</a>
                 </Link>
               </li>
               <li className="nav-item ms-lg-4">
@@ -94,18 +100,20 @@ function Navbar() {
               </li>
             </ul>
             {user.payload.name.name ? (
-              <ul className={`navbar-nav text center me-lg-5 pe-lg-5 ${style.link}`}>
+              <ul className={`navbar-nav me-lg-5 pe-lg-5 ${style.link}`}>
                 <li className="nav-item">
-                  <Link href={'/profile'}>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
+                  <Link href={"/profile"}>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" }}>
                       <div className={style.profilePictHolder}>
-                        {profilePict && profilePict !== '' ?
+                        {profilePict && profilePict !== "" ? (
                           <>
-                            <img src={profilePict} />
-                          </> : <>
-                            <Image src={unknownUserImg} />
+                            <Image src={profilePict} alt="profilePict" />
                           </>
-                        }
+                        ) : (
+                          <>
+                            <Image src={unknownUserImg} alt="unknownUserImg" />
+                          </>
+                        )}
                       </div>
                       <a className={`${style.link} text-warning`}>{user.payload.name.name}</a>
                     </div>
@@ -134,6 +142,7 @@ function Navbar() {
           </div>
         </div>
       </nav>
+      <Canvas style={{ position: "sticky" }} />
     </div>
   );
 }

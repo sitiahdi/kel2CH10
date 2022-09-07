@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import getCookie from "../utils/getCookie";
+
 import { Container } from "postcss";
 import { Col } from "react-bootstrap";
 import { Grid } from "swiper";
@@ -11,6 +15,17 @@ import { style } from "dom-helpers";
 import { useId, useState } from "react";
 
 function GamePage() {
+  const navigate = useRouter();
+  const [cookie, setCookie] = useState(null);
+
+  useEffect(() => {
+    const theCookie = getCookie("token");
+    if (!theCookie) {
+      navigate.push("/login");
+    }
+    setCookie(theCookie);
+  }, []);
+
   function handleClick() {
     window.location.reload();
   }
@@ -153,7 +168,7 @@ function GamePage() {
   //
 
   return (
-    <div style={{ backgroundColor: "#9C835F", height: "100vh", paddingLeft: "100px" }}>
+    <div style={{ backgroundColor: "#9C835F", height: "100vh", paddingLeft: "100px", paddingTop: "100px" }}>
       <div style={{ display: "flex", alignItems: "center", fontFamily: "monospace", fontSize: "30px", marginBottom: "30px" }}>
         <div>
           <Image src={Logo} alt="Home" />
