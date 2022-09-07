@@ -9,7 +9,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "@react-pdf/renderer": "^3.0.0",
+    "@react-pdf/renderer": "^2.3.0",
     "@reduxjs/toolkit": "^1.8.4",
     "bootstrap": "^5.2.0",
     "dotenv": "^16.0.1",
