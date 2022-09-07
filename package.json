@@ -1,6 +1,9 @@
 {
   "name": "ch10",
   "version": "0.1.0",
+  "engines": {
+    "node": "16.14.0"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,17 +12,22 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.0.0",
     "@reduxjs/toolkit": "^1.8.4",
     "bootstrap": "^5.2.0",
     "dotenv": "^16.0.1",
     "firebase": "^9.9.2",
     "jwt-decode": "^3.1.2",
-    "next": "12.2.4",
+    "next": "^12.2.4",
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.2.0",
+<<<<<<< HEAD
     "react-h5-audio-player": "^3.8.5",
     "react-player": "^2.10.1",
+=======
+    "react-pdf": "^5.7.2",
+>>>>>>> 92d9db21a9f21b30094255795a7f5a81fb7e776e
     "react-redux": "^8.0.2",
     "swiper": "^8.2.2",
     "uuid": "^9.0.0"

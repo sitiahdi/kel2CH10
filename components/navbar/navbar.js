@@ -53,7 +53,12 @@ function Navbar() {
     signOut(auth)
       .then(() => {
         document.cookie.split(";").forEach((c) => {
-          document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+          document.cookie = c
+            .replace(/^ +/, "")
+            .replace(
+              /=.*/,
+              "=;expires=" + new Date().toUTCString() + ";path=/"
+            );
         });
         dispatch(setLogout);
         window.location.href = "/";
@@ -63,16 +68,32 @@ function Navbar() {
   };
   return (
     <div>
-      <nav className={`navbar fixed-top navbar-expand-lg navbar-dark py-lg-3 px-sm-5 px-lg-2 px-3 ${style.navbar}`}>
+      <nav
+        className={`navbar fixed-top navbar-expand-lg navbar-dark py-lg-3 px-sm-5 px-lg-2 px-3 ${style.navbar}`}
+      >
         <div className="container-fluid">
           <Link href="/">
-            <a className={`navbar-brand ms-lg-5 ps-lg-5 me-lg-5 ${style.brand}`}>PLAY</a>
+            <a
+              className={`navbar-brand ms-lg-5 ps-lg-5 me-lg-5 ${style.brand}`}
+            >
+              PLAY
+            </a>
           </Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className={`navbar-nav ms-xl-auto ps-lg-auto me-lg-auto ${style.link}`}>
+            <ul
+              className={`navbar-nav text center ms-xl-auto ps-lg-auto me-lg-auto ${style.link}`}
+            >
               <li className="nav-item ms-lg-4">
                 <Link href="/game-list">
                   <a className={`${style.link}`}>GAME</a>
@@ -98,35 +119,55 @@ function Navbar() {
                   <a className={`${style.link}`}>NEWS</a>
                 </Link>
               </li>
+              <li className="nav-item ms-lg-4">
+                <Link href="/specification">
+                  <a className={`${style.link}`}>SPECIFICATION</a>
+                </Link>
+              </li>
             </ul>
             {user.payload.name.name ? (
-              <ul className={`navbar-nav me-lg-5 pe-lg-5 ${style.link}`}>
+              <ul
+                className={`navbar-nav text center me-lg-5 pe-lg-5 ${style.link}`}
+              >
                 <li className="nav-item">
                   <Link href={"/profile"}>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: "pointer",
+                      }}
+                    >
                       <div className={style.profilePictHolder}>
                         {profilePict && profilePict !== "" ? (
                           <>
-                            <Image src={profilePict} alt="profilePict" />
+                            <img src={profilePict} />
                           </>
                         ) : (
                           <>
-                            <Image src={unknownUserImg} alt="unknownUserImg" />
+                            <Image src={unknownUserImg} />
                           </>
                         )}
                       </div>
-                      <a className={`${style.link} text-warning`}>{user.payload.name.name}</a>
+                      <a className={`${style.link} text-warning`}>
+                        {user.payload.name.name}
+                      </a>
                     </div>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <button onClick={() => handleLogout()}>
-                    <a className={`${style.link} text-danger ms-lg-4`}>LOGOUT</a>
+                    <a className={`${style.link} text-danger ms-lg-4`}>
+                      LOGOUT
+                    </a>
                   </button>
                 </li>
               </ul>
             ) : (
-              <ul className={`navbar-nav text center me-lg-5 pe-lg-5 ${style.link}`}>
+              <ul
+                className={`navbar-nav text center me-lg-5 pe-lg-5 ${style.link}`}
+              >
                 <li className="nav-item">
                   <Link href="/Register">
                     <a className={`${style.link}`}>REGISTER</a>
