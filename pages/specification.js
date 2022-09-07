@@ -54,7 +54,7 @@ const Pdfreact = () => {
   );
 };
 
-const PdfReader = () => {
+function PdfReader() {
   const [hasMounted, sethasMounted] = useState(false);
   const [download, setDownload] = useState(false);
 
