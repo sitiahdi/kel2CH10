@@ -150,7 +150,7 @@ function Profile() {
             return
         }
         
-        fetch('https://binar-ch10-server.herokuapp.com/api/upload', {
+        fetch('http://localhost:8000/api/upload', {
             method: 'POST',
             mode: 'cors',
             headers: {
