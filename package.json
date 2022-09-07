@@ -22,15 +22,9 @@
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.2.0",
-<<<<<<< HEAD
-    "react-h5-audio-player": "^3.8.5",
-    "react-player": "^2.10.1",
-=======
     "react-pdf": "^5.7.2",
->>>>>>> 92d9db21a9f21b30094255795a7f5a81fb7e776e
     "react-redux": "^8.0.2",
-    "swiper": "^8.2.2",
-    "uuid": "^9.0.0"
+    "swiper": "^8.2.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

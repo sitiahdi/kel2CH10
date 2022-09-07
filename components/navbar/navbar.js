@@ -13,7 +13,6 @@ import firebaseApp from "../../services/firebase";
 
 import unknownUserImg from "../../public/image/unknownUser.png";
 import { setPict } from "../../redux/profilePict";
-import Canvas from "../canvas/canvas";
 
 function Navbar() {
   const auth = getAuth(firebase);
@@ -100,11 +99,6 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item ms-lg-4">
-                <Link href="/moments">
-                  <a className={`${style.link}`}>MOMENTS</a>
-                </Link>
-              </li>
-              <li className="nav-item ms-lg-4">
                 <Link href="/#features">
                   <a className={`${style.link}`}>FEATURES</a>
                 </Link>
@@ -183,7 +177,6 @@ function Navbar() {
           </div>
         </div>
       </nav>
-      <Canvas style={{ position: "sticky" }} />
     </div>
   );
 }
