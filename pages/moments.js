@@ -32,7 +32,7 @@ function Moments() {
   const [videoList, setVideoList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const videoListRef = ref(storage, "video/");
+  const videoListRef = ref(storage, `video`);
   const handleUpload = () => {
     if (videoUpload == null) return;
     setLoading(true);
@@ -41,8 +41,8 @@ function Moments() {
     uploadTask.on(
       "state_change",
       (snapshot) => {
-        const progressValue = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        fixedProgress = progressValue.toFixed();
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress.toFixed() + "% done");
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -88,11 +88,6 @@ function Moments() {
       ) : (
         <div className={`mt-2 mb-5`}>
           <p className={`fw-bold fs-3`}>Uploading...</p>
-          <div className={"progress"}>
-            <div className={"progress-bar progress-bar-striped bg-warning"} role="progressbar" aria-label="Warning striped example" style={{ width: `${fixedProgress}%` }} aria-valuemin="0" aria-valuemax="100">
-              {fixedProgress}%
-            </div>
-          </div>
         </div>
       )}
       <div className={`d-flex flex-wrap gap-5 align-items-center justify-content-center`}>
