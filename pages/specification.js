@@ -45,7 +45,7 @@ const Pdfreact = () => {
             atau gamsit dilakukan oleh kedua belah pihak, yang sebelumnya telah
             dibuat kesepakatan. Bersama terlebih dahulu. Biasanya dalam
             permainan anak-anak, pemenang suit dapat lebih dulu bermain atau
-            terbebas test
+            terbebas
           </Text>
         </View>
       </Page>
