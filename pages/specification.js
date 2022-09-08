@@ -47,7 +47,6 @@ const Pdfreact = () => {
             permainan anak-anak, pemenang suit dapat lebih dulu bermain atau
             terbebas
           </Text>
-          <Text>Test Only</Text>
         </View>
       </Page>
     </Document>
