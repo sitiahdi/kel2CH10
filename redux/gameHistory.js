@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 
 
 export const gameHistorySlice = createSlice({
-    name: "gameHistory",
-    initialState: {
-        history: []
-    },
-    reducers: {
-        setHistory: (state, action) => {
-            state.history = action.payload;
-        }
-    }
+	name: "gameHistory",
+	initialState: {
+		history: []
+	},
+	reducers: {
+		setHistory: (state, action) => {
+			state.history = action.payload;
+		}
+	}
 });
 
 export default gameHistorySlice.reducer;
