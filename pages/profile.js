@@ -75,7 +75,7 @@ function Profile() {
                         username: e.data().username,
                         email: e.data().email,
                         score: e.data().score,
-                        pict: e.data()?.pict
+                        pict: e.data().pict
                     }
                     dispatch(setName(theData.username));
                     dispatch(setPict(theData.pict));
