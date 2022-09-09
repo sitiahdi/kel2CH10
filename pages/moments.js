@@ -32,7 +32,7 @@ function Moments() {
   const [videoList, setVideoList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const videoListRef = ref(storage, `video`);
+  const videoListRef = ref(storage, "video");
   const handleUpload = () => {
     if (videoUpload == null) return;
     setLoading(true);
@@ -73,27 +73,27 @@ function Moments() {
   };
 
   return (
-    <div style={{ paddingTop: "80px", paddingBottom: "50px" }} className={`bg-black text-white d-flex flex-column align-items-center justify-content-center`}>
-      <h1 className={`display-1`}>Moments</h1>
-      <p className={`fs-3 mb-4`}>Share your gaming moments here.</p>
+    <div style={{ paddingTop: "80px", paddingBottom: "50px" }} className={"bg-black text-white d-flex flex-column align-items-center justify-content-center"}>
+      <h1 className={"display-1"}>Moments</h1>
+      <p className={"fs-3 mb-4"}>Share your gaming moments here.</p>
       {loading === false ? (
-        <div className={`d-flex flex-column gap-2 mb-5`}>
-          <input className={`form-control`} type="file" accept="video/*" onChange={(e) => setVideoUpload(e.target.files[0])} />
-          <div className={`d-flex justify-content-center align-content-center`}>
-            <button className={`btn btn-warning px-5`} onClick={handleUpload}>
-              <p className={`fw-bold`}>Upload</p>
+        <div className={"d-flex flex-column gap-2 mb-5"}>
+          <input className={"form-control"} type="file" accept="video/*" onChange={(e) => setVideoUpload(e.target.files[0])} />
+          <div className={"d-flex justify-content-center align-content-center"}>
+            <button className={"btn btn-warning px-5"} onClick={handleUpload}>
+              <p className={"fw-bold"}>Upload</p>
             </button>
           </div>
         </div>
       ) : (
-        <div className={`mt-2 mb-5`}>
-          <p className={`fw-bold fs-3`}>Uploading...</p>
+        <div className={"mt-2 mb-5"}>
+          <p className={"fw-bold fs-3"}>Uploading...</p>
         </div>
       )}
-      <div className={`d-flex flex-wrap gap-5 align-items-center justify-content-center`}>
+      <div className={"d-flex flex-wrap gap-5 align-items-center justify-content-center"}>
         {videoList.map((videoUrl) => {
           return (
-            <div className={`bg-dark min-w-fit`} key={v4()}>
+            <div className={"bg-dark min-w-fit"} key={v4()}>
               <ReactPlayer controls url={videoUrl} width="100%" style={{ aspectRatio: 16 / 9, minWidth: "240px" }} />
             </div>
           );
