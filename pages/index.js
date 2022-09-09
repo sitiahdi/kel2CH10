@@ -15,7 +15,7 @@ function Home() {
 
 			<div id="main" className={`${styles.main} d-flex justify-content-center align-content-center`}>
 				<div className="main-container d-flex justify-content-center align-content-center flex-column">
-					<h1 className="main-title text-center fw-bold text-white mb-5 display-3">PLAY TRADITIONAL GAME</h1>
+					<h1 className="main-title text-center fw-bold text-white mb-5 display-3">PLAY TRADITIONAL GAME TEST</h1>
 					<h3 className="main-text text-center fs-2 text-white px-2 mb-5">Experience new traditional game play</h3>
 					<div className="d-flex justify-content-center align-content-center mt-4">
 						<Link href="/game-list">
