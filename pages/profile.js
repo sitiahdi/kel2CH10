@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import styles from '../styles/profile.module.css';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import styles from "../styles/profile.module.css";
+import Link from "next/link";
 
-import firebase from '../services/firebase';
-import jwtDecode from 'jwt-decode';
+import firebase from "../services/firebase";
+import jwtDecode from "jwt-decode";
 
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { getAuth, signInWithEmailAndPassword, updatePassword } from "firebase/auth";
-import getCookie from '../utils/getCookie';
+import getCookie from "../utils/getCookie";
 
 import { useSelector } from "react-redux"
-import { useDispatch } from 'react-redux';
-import { setName } from '../redux/name';
-import { setPict } from '../redux/profilePict';
+import { useDispatch } from "react-redux";
+import { setName } from "../redux/name";
+import { setPict } from "../redux/profilePict";
 
-import unknownUserImg from '../public/image/unknownUser.png'
+import unknownUserImg from "../public/image/unknownUser.png"
 
 
 
@@ -28,9 +28,9 @@ function Profile() {
     const [changeOverlay, setChangeOverlay] = useState(0);
     const [loading, setLoading] = useState(false);
 
-    const [previewSource, setPreviewSource] = useState('');
+    const [previewSource, setPreviewSource] = useState("");
     const [imgFile, setImgFile] = useState(null);
-    const [imgValue, setImgValue] = useState('');
+    const [imgValue, setImgValue] = useState("");
 
     const [newName, setNewName] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -44,9 +44,9 @@ function Profile() {
     const profilePict = useSelector(state => state.profilePict.pict)
     
     useEffect(() => {
-        const theCookie = getCookie('token');
+        const theCookie = getCookie("token");
         if (!theCookie) {
-            navigate.push('/login')
+            navigate.push("/login")
         }
         setCookie(theCookie);
     }, []);
@@ -60,10 +60,10 @@ function Profile() {
     function getData() {
         const decoded = jwtDecode(cookie);
         
-        db.collection('users').get().then(querrySnapShot => {
+        db.collection("users").get().then(querrySnapShot => {
             
             if (!querrySnapShot) {
-                throw Error('failed to get data')
+                throw Error("failed to get data")
             }
             
             
@@ -75,7 +75,7 @@ function Profile() {
                         username: e.data().username,
                         email: e.data().email,
                         score: e.data().score,
-                        pict: e.data()?.pict
+                        pict: e.data().pict
                     }
                     dispatch(setName(theData.username));
                     dispatch(setPict(theData.pict));
@@ -150,11 +150,11 @@ function Profile() {
             return
         }
         
-        fetch('https://binar-ch10-server.herokuapp.com/api/upload', {
-            method: 'POST',
-            mode: 'cors',
+        fetch("https://binar-ch10-server.herokuapp.com/api/upload", {
+            method: "POST",
+            mode: "cors",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 pict: previewSource
@@ -178,7 +178,7 @@ function Profile() {
             setChangeOverlay(0);
             setImgFile(null);
         }).catch(err => {
-            alert('Try Again');
+            alert("Try Again");
             console.log(err);
         });
 
@@ -191,12 +191,12 @@ function Profile() {
             return (
                 <div className={styles.changeOverlay}>
                     <div className={styles.changeHolder}>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: 'white' }}>Change Name</h2>
-                        <form onSubmit={(e) => handleChangeName(e)} style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div><input placeholder='new name' value={newName} type='text' onChange={(e) => setNewName(e.target.value)} /></div>
-                            <div style={{ marginTop: '20px' }}><button className={styles.submitBtn} type='submit'>Submit</button></div>
+                        <h2 style={{ textAlign: "center", marginBottom: "2rem", color: "white" }}>Change Name</h2>
+                        <form onSubmit={(e) => handleChangeName(e)} style={{ display: "flex", flexDirection: "column" }}>
+                            <div><input placeholder="new name" value={newName} type="text" onChange={(e) => setNewName(e.target.value)} /></div>
+                            <div style={{ marginTop: "20px" }}><button className={styles.submitBtn} type="submit">Submit</button></div>
                         </form>
-                        <button style={{ fontSize: '1.2rem', marginTop: '1rem' }} onClick={() => setChangeOverlay(0)} className={styles.backBtn}>Back</button>
+                        <button style={{ fontSize: "1.2rem", marginTop: "1rem" }} onClick={() => setChangeOverlay(0)} className={styles.backBtn}>Back</button>
                     </div>
                 </div>
             )
@@ -204,13 +204,13 @@ function Profile() {
             return (
                 <div className={styles.changeOverlay}>
                     <div className={styles.changeHolder}>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: 'white' }}>Change Password</h2>
-                        <form onSubmit={(e) => handleChangePassword(e)} style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ marginBottom: '1rem' }}><input value={oldPassword} type="Password" placeholder='old password' onChange={(e) => setOldPassword(e.target.value)} /></div>
-                            <div><input placeholder='new password' value={newPassword} type="Password" onChange={(e) => setNewPassword(e.target.value)} /></div>
-                            <div style={{ marginTop: '20px' }}><button className={styles.submitBtn} type='submit'>Submit</button></div>
+                        <h2 style={{ textAlign: "center", marginBottom: "2rem", color: "white" }}>Change Password</h2>
+                        <form onSubmit={(e) => handleChangePassword(e)} style={{ display: "flex", flexDirection: "column" }}>
+                            <div style={{ marginBottom: "1rem" }}><input value={oldPassword} type="Password" placeholder="old password" onChange={(e) => setOldPassword(e.target.value)} /></div>
+                            <div><input placeholder="new password" value={newPassword} type="Password" onChange={(e) => setNewPassword(e.target.value)} /></div>
+                            <div style={{ marginTop: "20px" }}><button className={styles.submitBtn} type="submit">Submit</button></div>
                         </form>
-                        <button style={{ fontSize: '1.2rem', marginTop: '1rem' }} onClick={() => setChangeOverlay(0)} className={styles.backBtn}>Back</button>
+                        <button style={{ fontSize: "1.2rem", marginTop: "1rem" }} onClick={() => setChangeOverlay(0)} className={styles.backBtn}>Back</button>
                     </div>     
                 </div>
             )
@@ -218,14 +218,14 @@ function Profile() {
             return (
                 <div className={styles.changeOverlay}>
                     <div className={styles.changeHolder}>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: 'white' }}>Change Profile Picture</h2>
+                        <h2 style={{ textAlign: "center", marginBottom: "2rem", color: "white" }}>Change Profile Picture</h2>
                         <div className={styles.previewImgHolder}>
                             <img src={previewSource} />
                         </div>
-                        <form onSubmit={e => handlePictureSubmit(e)} style={{ display: 'flex', flexDirection: 'column' }}>
+                        <form onSubmit={e => handlePictureSubmit(e)} style={{ display: "flex", flexDirection: "column" }}>
                             <div className={styles.changePictOverlayBtnHolder}>
-                                <button style={{ fontSize: '1.2rem', marginTop: '1rem' }} onClick={() => { setChangeOverlay(0), setImgFile(null) }} className={styles.backBtn}>Back</button>
-                                <div style={{ marginTop: '20px' }}><button className={styles.submitBtn} type='submit'>Submit</button></div>
+                                <button style={{ fontSize: "1.2rem", marginTop: "1rem" }} onClick={() => { setChangeOverlay(0), setImgFile(null) }} className={styles.backBtn}>Back</button>
+                                <div style={{ marginTop: "20px" }}><button className={styles.submitBtn} type="submit">Submit</button></div>
                             </div>
                         </form>
                     </div>     
@@ -233,7 +233,7 @@ function Profile() {
             )
         } else if (changeOverlay === 0) {
             return (
-                <div style={{ display: 'none' }}></div>
+                <div style={{ display: "none" }}></div>
             )
         }
     }
@@ -242,7 +242,7 @@ function Profile() {
         return (
             <section className={styles.profilePage}>
                 <div className={styles.profilePageContentHolder}>
-                    <h1 style={{textAlign: 'center', color: 'white', fontSize: '4rem'}}>Loading ...</h1>
+                    <h1 style={{textAlign: "center", color: "white", fontSize: "4rem"}}>Loading ...</h1>
                 </div>
             </section>
         )
@@ -256,24 +256,24 @@ function Profile() {
                     {renderedChangeOverlay()}
                     <div className={styles.profilePageContentHolder}>
                         <div className={styles.leftSide}>
-                            <div style={{ height: '90%' }}></div>
-                            <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                <Link href={'/'}>
+                            <div style={{ height: "90%" }}></div>
+                            <div style={{ height: "10%", width: "100%", display: "flex", justifyContent: "center" }}>
+                                <Link href={"/"}>
                                     <button className={styles.backBtn}>Back</button>
                                 </Link>
                             </div>
                         </div>
                         <div className={styles.rightSide}>
-                            <div style={{ marginBottom: '5rem' }}>
+                            <div style={{ marginBottom: "5rem" }}>
                                 <h1 className={styles.username}>User : {username}</h1>
-                                <p style={{ color: 'gray', cursor: 'pointer' }} onClick={() => setChangeOverlay(1)} >change username</p>
+                                <p style={{ color: "gray", cursor: "pointer" }} onClick={() => setChangeOverlay(1)} >change username</p>
                             </div>
                             <p className={styles.emailHolder}>email : {data.email}</p>
                             <p>score : {data.score}</p>
-                            <p style={{ color: 'gray', cursor: 'pointer', marginTop: '3rem' }} onClick={() => setChangeOverlay(2)} >change password</p>
+                            <p style={{ color: "gray", cursor: "pointer", marginTop: "3rem" }} onClick={() => setChangeOverlay(2)} >change password</p>
 
                             <div className={styles.profilePictureHolder}>
-                                {profilePict && profilePict !== '' ?
+                                {profilePict && profilePict !== "" ?
                                     <>
                                         <img src={profilePict} />
                                     </> : <>
@@ -287,8 +287,8 @@ function Profile() {
                                     <input
                                         accept="image/png, image/gif, image/jpeg"
                                         className={styles.changePictBtn} 
-                                        type={'file'} 
-                                        name={'image'}
+                                        type={"file"} 
+                                        name={"image"}
                                         value={imgValue}
                                         onChange={e => handleFileInputChange(e)} 
                                     />
