@@ -31,4 +31,4 @@ jobs:
       
       # Install dependencies
       - name: Run npm install
-        run: npm install
+        run: npm install --force
