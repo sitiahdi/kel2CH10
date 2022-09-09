@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
+import { Container, Row, Col } from "react-bootstrap";
 import { storage } from "../services/strorage";
 import { ref, uploadBytesResumable, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
@@ -73,7 +74,7 @@ function Moments() {
   };
 
   return (
-    <div style={{ paddingTop: "80px", paddingBottom: "50px" }} className={"bg-black text-white d-flex flex-column align-items-center justify-content-center"}>
+    <div style={{ paddingTop: "80px", paddingBottom: "50px" }} className={"bg-black text-white text-center d-flex flex-column align-items-center justify-content-center"}>
       <h1 className={"display-1"}>Moments</h1>
       <p className={"fs-3 mb-4"}>Share your gaming moments here.</p>
       {loading === false ? (
@@ -90,15 +91,19 @@ function Moments() {
           <p className={"fw-bold fs-3"}>Uploading...</p>
         </div>
       )}
-      <div className={"d-flex flex-wrap gap-5 align-items-center justify-content-center"}>
-        {videoList.map((videoUrl) => {
-          return (
-            <div className={"bg-dark min-w-fit"} key={v4()}>
-              <ReactPlayer controls url={videoUrl} width="100%" style={{ aspectRatio: 16 / 9, minWidth: "240px" }} />
-            </div>
-          );
-        })}
-      </div>
+      <Container>
+        <Row>
+          {videoList.map((videoUrl) => {
+            return (
+              <Col lg={6} key={v4()} className={"mb-3"}>
+                <div className={"bg-dark"}>
+                  <ReactPlayer controls url={videoUrl} width="100%" height="100%" className={"ratio ratio-16x9"} />
+                </div>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
     </div>
   );
 }
