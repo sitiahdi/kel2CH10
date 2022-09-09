@@ -10,16 +10,16 @@ import { useRouter } from "next/router";
 import { getAuth, signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import getCookie from "../utils/getCookie";
 
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setName } from "../redux/name";
 import { setPict } from "../redux/profilePict";
 
-import unknownUserImg from "../public/image/unknownUser.png"
+import unknownUserImg from "../public/image/unknownUser.png";
 
 
 
-const db = firebase.firestore()
+const db = firebase.firestore();
 
 function Profile() {
 
@@ -41,12 +41,12 @@ function Profile() {
     const auth = getAuth(firebase);
 
     const username = useSelector(state => state.name.name);
-    const profilePict = useSelector(state => state.profilePict.pict)
+    const profilePict = useSelector(state => state.profilePict.pict);
     
     useEffect(() => {
         const theCookie = getCookie("token");
         if (!theCookie) {
-            navigate.push("/login")
+            navigate.push("/login");
         }
         setCookie(theCookie);
     }, []);
@@ -63,7 +63,7 @@ function Profile() {
         db.collection("users").get().then(querrySnapShot => {
             
             if (!querrySnapShot) {
-                throw Error("failed to get data")
+                throw Error("failed to get data");
             }
             
             
@@ -76,7 +76,7 @@ function Profile() {
                         email: e.data().email,
                         score: e.data().score,
                         pict: e.data().pict
-                    }
+                    };
                     dispatch(setName(theData.username));
                     dispatch(setPict(theData.pict));
                     setData(theData);
@@ -92,7 +92,7 @@ function Profile() {
         e.preventDefault();
         
         if (newName === "") {
-            return alert("input your new name")
+            return alert("input your new name");
         }
         db.collection("users").doc(data.id).update(
             { username: newName }
@@ -110,7 +110,7 @@ function Profile() {
         signInWithEmailAndPassword(auth, decoded.email, oldPassword).then(e => {
             const user = auth.currentUser;
             updatePassword(user, newPassword).then(() => {
-                setNewPassword("")
+                setNewPassword("");
                 setOldPassword("");
                 setChangeOverlay(0);
             }).catch(err=> {
@@ -129,15 +129,15 @@ function Profile() {
 
     useEffect(() => {
         if (imgFile) {
-            const reader = new FileReader()
+            const reader = new FileReader();
             reader.readAsDataURL(imgFile);
             reader.onloadend = () => {
                 setPreviewSource(reader.result);
-            }
+            };
     
             setChangeOverlay(3);
         }
-    }, [imgFile])
+    }, [imgFile]);
 
 
 
@@ -147,7 +147,7 @@ function Profile() {
         
         if (!imgFile) {
             alert("Try Again");
-            return
+            return;
         }
         
         fetch("https://binar-ch10-server.herokuapp.com/api/upload", {
@@ -199,7 +199,7 @@ function Profile() {
                         <button style={{ fontSize: "1.2rem", marginTop: "1rem" }} onClick={() => setChangeOverlay(0)} className={styles.backBtn}>Back</button>
                     </div>
                 </div>
-            )
+            );
         } else if (changeOverlay === 2) {
             return (
                 <div className={styles.changeOverlay}>
@@ -213,7 +213,7 @@ function Profile() {
                         <button style={{ fontSize: "1.2rem", marginTop: "1rem" }} onClick={() => setChangeOverlay(0)} className={styles.backBtn}>Back</button>
                     </div>     
                 </div>
-            )
+            );
         } else if (changeOverlay === 3) {
             return (
                 <div className={styles.changeOverlay}>
@@ -224,17 +224,17 @@ function Profile() {
                         </div>
                         <form onSubmit={e => handlePictureSubmit(e)} style={{ display: "flex", flexDirection: "column" }}>
                             <div className={styles.changePictOverlayBtnHolder}>
-                                <button style={{ fontSize: "1.2rem", marginTop: "1rem" }} onClick={() => { setChangeOverlay(0), setImgFile(null) }} className={styles.backBtn}>Back</button>
+                                <button style={{ fontSize: "1.2rem", marginTop: "1rem" }} onClick={() => { setChangeOverlay(0), setImgFile(null); }} className={styles.backBtn}>Back</button>
                                 <div style={{ marginTop: "20px" }}><button className={styles.submitBtn} type="submit">Submit</button></div>
                             </div>
                         </form>
                     </div>     
                 </div>
-            )
+            );
         } else if (changeOverlay === 0) {
             return (
                 <div style={{ display: "none" }}></div>
-            )
+            );
         }
     }
 
@@ -245,7 +245,7 @@ function Profile() {
                     <h1 style={{textAlign: "center", color: "white", fontSize: "4rem"}}>Loading ...</h1>
                 </div>
             </section>
-        )
+        );
     }
 
     return (
@@ -299,7 +299,8 @@ function Profile() {
                 </section>
             }
         </>
-    )
+    );
 }
 
-export default Profile
+
+export default Profile;
