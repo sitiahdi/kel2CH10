@@ -10,24 +10,27 @@ function Home() {
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
 
-      <div id="main" className={`${styles.main} d-flex justify-content-center align-content-center`}>
-        <div className="main-container d-flex justify-content-center align-content-center flex-column">
-          <h1 className="main-title text-center fw-bold text-white mb-5 display-3">PLAY TRADITIONAL GAME</h1>
-          <h3 className="main-text text-center fs-2 text-white px-2 mb-5">Experience new traditional game play</h3>
-          <div className="d-flex justify-content-center align-content-center mt-4">
-            <Link href="/game-list">
-              <a className="text-decoration-none link-dark">
-                <button type="button" className={`${styles.button} btn btn-lg text-nowrap`}>
-                  <strong>PLAY NOW</strong>
-                </button>
-              </a>
-            </Link>
-          </div>
-        </div>
-      </div>
+			<div id="main" className={`${styles.main} d-flex justify-content-center align-content-center`}>
+				<div className="main-container d-flex justify-content-center align-content-center flex-column">
+					<h1 className="main-title text-center fw-bold text-white mb-5 display-3">PLAY TRADITIONAL GAME TEST</h1>
+					<h3 className="main-text text-center fs-2 text-white px-2 mb-5">Experience new traditional game play</h3>
+					<div className="d-flex justify-content-center align-content-center mt-4">
+						<Link href="/game-list">
+							<a className="text-decoration-none link-dark">
+								<button type="button" className={`${styles.button} btn btn-lg text-nowrap`}>
+									<strong>PLAY NOW</strong>
+								</button>
+							</a>
+						</Link>
+					</div>
+				</div>
+			</div>
 
       <div id="features" className={styles.features}>
         <div className="features-container">

@@ -1,15 +1,14 @@
-import firebaseApp from '../services/firebase';
 
-const db = firebaseApp.firestore();
 
-export default function checkPlayed(userGameHistory, gameId) {
-    let result
-    userGameHistory.forEach(e => {
-        if (e === gameId) {
-            result = true
-        } else {
-            result = false
-        }
-    })
-    return result
+
+function checkPlayed(userGameHistory, gameId) {
+
+	for (let i = 0; i < userGameHistory.length; i++) {
+		if (userGameHistory[i] === gameId) {
+			return true;
+		}
+	}
+	return false;
 }
+
+module.exports = checkPlayed;

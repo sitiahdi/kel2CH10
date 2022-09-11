@@ -2,13 +2,13 @@ import jwtDecode from "jwt-decode";
 
 
 
-function getCookie(cookieName) {
+function getCookieTest(cookieName, cookieSample) {
 	try {
 		const name = cookieName + "=";
-		const cookieDecode = decodeURIComponent(document.cookie);
-    
+		const cookieDecode = decodeURIComponent(cookieSample);
+		
 		const cookieArr = cookieDecode.split(";");
-    
+		
 		let res;
     
 		cookieArr.forEach(e => {
@@ -16,7 +16,7 @@ function getCookie(cookieName) {
 				res = e.substring(name.length);
 			}
 		});
-    
+
 		const decoded = jwtDecode(res);
 		if (decoded === undefined || !decoded) {
 			throw Error(err);
@@ -27,4 +27,4 @@ function getCookie(cookieName) {
 	}
 }
 
-export default getCookie;
+module.exports = getCookieTest;
